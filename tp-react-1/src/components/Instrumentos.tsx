@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Instrumento from './Instrumento';
 import { IInstrumento } from '../type/IInstrumento';
 
-const Instrumentos = () => {
+export const Instrumentos = () => {
   const [instrumentos, setInstrumentos] = useState<IInstrumento[]>([]);
 
   useEffect(() => {
