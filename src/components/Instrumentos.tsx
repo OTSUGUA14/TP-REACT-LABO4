@@ -16,18 +16,9 @@ export const Instrumentos = () => {
     <div>
       <h1>INSTRUMENTOS MUSICALES</h1>
       {instrumentos.map((instrumento) => (
-        <Instrumento
-          id={instrumento.id}
-          instrumento={instrumento.instrumento}
-          marca={instrumento.marca}
-          modelo={instrumento.modelo}
-          imagen={instrumento.imagen}
-          precio={instrumento.precio}
-          costoEnvio={instrumento.costoEnvio}
-          cantidadVendida={instrumento.cantidadVendida}
-          descripcion={instrumento.descripcion}
-        />
+        <Instrumento key={instrumento.id} instrumento={instrumento} />
       ))}
+
     </div>
   );
 };

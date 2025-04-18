@@ -1,8 +1,11 @@
 import { FC } from "react";
 import { instrumentoType } from "../type/InstrumentoType";
-import "./Instrumento.css"; 
-
-const Intrumento: FC<instrumentoType> = (instrumento) => {
+import "../styles/Instrumento.css";
+import { Link } from 'react-router-dom';
+interface Props {
+  instrumento: instrumentoType;
+}
+const Instrumento = ({ instrumento }: Props) => {
   return (
     <div className="card" id={instrumento.id}>
       <img
@@ -17,13 +20,16 @@ const Intrumento: FC<instrumentoType> = (instrumento) => {
           <h4 className="subtitle">{instrumento.modelo}</h4>
           <p className="price">${instrumento.precio}</p>
 
-          {instrumento.costoEnvio === "G" ? (            
-            <p className="envio-gratis"><img className="camion" src="/img/camion.png"/>Envío gratis a todo el país</p>
+          {instrumento.costoEnvio === "G" ? (
+            <p className="envio-gratis"><img className="camion" src="/img/camion.png" />Envío gratis a todo el país</p>
           ) : (
             <p className="envio-costo">
               Costo de Envío Interior de Argentina: ${instrumento.costoEnvio}
             </p>
           )}
+          <button className="detalle-btn">
+            <Link to={`/instrumento/${instrumento.id}`}>Ver Detalle</Link>
+          </button>
         </div>
 
         <p className="vendidos">{instrumento.cantidadVendida} vendidos</p>
@@ -33,4 +39,4 @@ const Intrumento: FC<instrumentoType> = (instrumento) => {
   );
 };
 
-export default Intrumento;
+export default Instrumento;
