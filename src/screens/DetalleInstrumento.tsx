@@ -8,13 +8,21 @@ const InstrumentoDetalle = () => {
   const [instrumento, setInstrumento] = useState<instrumentoType | null>(null);
 
   useEffect(() => {
-    fetch("/instrumentos.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const encontrado = data.instrumentos.find((inst: instrumentoType) => inst.id === id);
-        setInstrumento(encontrado);
-      });
-  }, [id]);
+  fetch(`http://localhost:8080/instrumentos/${id}`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Error al cargar el instrumento');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      setInstrumento(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      // Puedes manejar el error aquí, por ejemplo, mostrando un mensaje de error en la UI
+    });
+}, [id]);
 
   if (!instrumento) return <p>Cargando...</p>;
 
