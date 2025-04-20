@@ -28,17 +28,16 @@ public class InstrumentoService {
 
     @Transactional
     public String addInstrumento(InstrumentoDTO instrumentoDTO){
-        Optional<CategoriaInstrumento> categoriaOptional = categoriaRepositorio.findById(instrumentoDTO.idCategoria());
         Instrumento instrumento = Instrumento.builder()
             .instrumento(instrumentoDTO.instrumento())
             .marca(instrumentoDTO.marca())
             .modelo(instrumentoDTO.modelo())
             .imagen(instrumentoDTO.imagen())
-            .precio(instrumentoDTO.precio())
+            .precio(instrumentoDTO.precio())            
             .costoEnvio(instrumentoDTO.costoEnvio())
             .cantidadVendida(instrumentoDTO.cantidadVendida())
             .descripcion(instrumentoDTO.descripcion())
-            .idCategoria(categoriaOptional.get())
+            .idCategoria(instrumentoDTO.idCategoria())
             .build();
         
         instrumentoRepository.save(instrumento);
@@ -88,9 +87,8 @@ public class InstrumentoService {
             if (instrumentoDTO.descripcion() != null) {
                 existingInstrumento.setDescripcion(instrumentoDTO.descripcion());
             }
-            if (instrumentoDTO.idCategoria() != null) {
-                Optional<CategoriaInstrumento> categorOptional = categoriaRepositorio.findById(instrumentoDTO.idCategoria());
-                existingInstrumento.setIdCategoria(categorOptional.get());
+            if (instrumentoDTO.idCategoria() != 0) {
+                existingInstrumento.setIdCategoria(instrumentoDTO.idCategoria());
             }
             return instrumentoRepository.save(existingInstrumento);
         }).orElseThrow(() -> new EntityNotFoundException("No se encontro una noticia con el ID: " + ID));
@@ -139,7 +137,7 @@ public class InstrumentoService {
                 .costoEnvio("G")
                 .cantidadVendida(28)
                 .descripcion("Estas viendo una excelente mandolina de la marca Stagg, con un sonido muy dulce, tapa aros y fondo de tilo, y diapasón de palisandro. Es un instrumento acústico (no se enchufa) de cuerdas dobles (4 pares) con la caja ovalada y cóncava, y el mástil corto. Su utilización abarca variados ámbitos, desde rock, folk, country y ensambles experimentales.")
-                .idCategoria(categoriaRepositorio.findById(1L).get())
+                .idCategoria(1L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -151,7 +149,7 @@ public class InstrumentoService {
                 .costoEnvio("150")
                 .cantidadVendida(10)
                 .descripcion("1 Pandereta - 32 sonajas metálicas. Más de 8 años vendiendo con 100 % de calificaciones POSITIVAS y clientes satisfechos !! ")
-                .idCategoria(categoriaRepositorio.findById(3L).get())
+                .idCategoria(3L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -163,7 +161,7 @@ public class InstrumentoService {
                 .costoEnvio("250")
                 .cantidadVendida(3)
                 .descripcion("Triangulo Musical de 24 Centímetros De Acero. ENVIOS POR CORREO O ENCOMIENDA: Se le deberán adicionar $40 en concepto de Despacho y el Costo del envío se abonará al recibir el producto en Terminal, Sucursal OCA o Domicilio")
-                .idCategoria(categoriaRepositorio.findById(3L).get())
+                .idCategoria(3L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -175,7 +173,7 @@ public class InstrumentoService {
                 .costoEnvio("G")
                 .cantidadVendida(2)
                 .descripcion("BARCHIME CORTINA MUSICAL DE 25 BARRAS LATIN CUSTOM. Emitimos factura A y B")
-                .idCategoria(categoriaRepositorio.findById(3L).get())
+                .idCategoria(3L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -187,7 +185,7 @@ public class InstrumentoService {
                 .costoEnvio("300")
                 .cantidadVendida(5)
                 .descripcion("Las calabazas utilizadas para nuestras artesanías son sembradas y cosechadas por nosotros, quienes seleccionamos el mejor fruto para garantizar la calidad del producto y ofrecerle algo creativo y original.")
-                .idCategoria(categoriaRepositorio.findById(3L).get())
+                .idCategoria(3L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -199,7 +197,7 @@ public class InstrumentoService {
                 .costoEnvio("2000")
                 .cantidadVendida(0)
                 .descripcion("Buen dia! Sale a la venta este Piano Alemán Neumeyer con candelabros incluidos. Tiene una talla muy bonita en la madera. Una pieza de calidad.")
-                .idCategoria(categoriaRepositorio.findById(4L).get())
+                .idCategoria(4L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -211,7 +209,7 @@ public class InstrumentoService {
                 .costoEnvio("G")
                 .cantidadVendida(5)
                 .descripcion("Material: Plástico smil madera 4 Cuerdas longitud: 60cm, el mejor regalo para usted, su familia y amigos, adecuado para 3-18 años de edad")
-                .idCategoria(categoriaRepositorio.findById(1L).get())
+                .idCategoria(1L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -223,7 +221,7 @@ public class InstrumentoService {
                 .costoEnvio("G")
                 .cantidadVendida(1375)
                 .descripcion("Organo Electrónico GADNIC T01. Display de Led. 54 Teclas. 100 Timbres / 100 Ritmos. 4 1/2 octavas. 8 Percusiones. 8 Canciones de muestra. Grabación y reproducción. Entrada para Micrófono. Salida de Audio (Auriculares / Amplificador). Vibrato. Sustain Incluye Atril Apoya partitura y Micrófono. Dimensiones: 84,5 x 32,5 x 11 cm")
-                .idCategoria(categoriaRepositorio.findById(5L).get())
+                .idCategoria(5L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -235,7 +233,7 @@ public class InstrumentoService {
                 .costoEnvio("300")
                 .cantidadVendida(15)
                 .descripcion("Estas viendo un excelente y completísimo set de percusion para niños con estuche rígido, equipado con los instrumentos mas divertidos! De gran calidad y sonoridad. Ideal para jardines, escuelas primarias, musicoterapeutas o chicos que se quieran iniciar en la música de la mejor manera. Es un muy buen producto que garantiza entretenimiento en cualquier casa o reunión, ya que esta equipado para que varias personas al mismo tiempo estén tocando un instrumento.")
-                .idCategoria(categoriaRepositorio.findById(3L).get())
+                .idCategoria(3L)
                 .build());
 
         instrumentos.add(Instrumento.builder()
@@ -247,7 +245,7 @@ public class InstrumentoService {
                 .costoEnvio("250")
                 .cantidadVendida(380)
                 .descripcion("DESCRIPCIÓN: DE 1 A 3 AÑOS. EL SET INCLUYE 5 TAMBORES, PALILLOS Y EL PLATILLO TAL CUAL LAS FOTOS. SONIDOS REALISTAS Y FÁCIL DE MONTAR. MEDIDAS: 40X20X46 CM")
-                .idCategoria(categoriaRepositorio.findById(3L).get())
+                .idCategoria(3L)
                 .build());
 
         return instrumentoRepository.saveAll(instrumentos);
