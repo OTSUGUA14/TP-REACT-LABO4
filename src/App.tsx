@@ -1,6 +1,5 @@
 
 import './App.css'
-import React from 'react';
 
 
 import { BrowserRouter } from 'react-router-dom'
@@ -13,7 +12,7 @@ function App() {
     <BrowserRouter>
       <div className='bg-gray-100'>
 
-       <AppRouter></AppRouter>
+        <AppRouter></AppRouter>
       </div>
     </BrowserRouter>
   )

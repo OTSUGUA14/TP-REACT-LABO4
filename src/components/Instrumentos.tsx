@@ -7,9 +7,9 @@ export const Instrumentos = () => {
 
   useEffect(() => {
     // Cargar el archivo JSON desde la carpeta public
-    fetch('/instrumentos.json')
+    fetch('http://localhost:8080/instrumentos/getAll')
       .then((response) => response.json())
-      .then((data) => setInstrumentos(data.instrumentos))
+      .then((data) => setInstrumentos(data))
       .catch((error) => console.error('Error al cargar los datos:', error));
   }, []);
   return (

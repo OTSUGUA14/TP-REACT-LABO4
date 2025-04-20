@@ -20,7 +20,7 @@ const InstrumentoDetalle = () => {
     })
     .catch((error) => {
       console.error(error);
-      // Puedes manejar el error aquí, por ejemplo, mostrando un mensaje de error en la UI
+      //
     });
 }, [id]);
 
@@ -44,7 +44,7 @@ const InstrumentoDetalle = () => {
           <p><strong>Marca:</strong> {instrumento.marca}</p>
           <p><strong>Modelo:</strong> {instrumento.modelo}</p>
 
-          <p className="envio">
+          <div className="envio">
             <strong>Costo Envío:</strong>{" "}
             {instrumento.costoEnvio === "G" ? (
               <>
@@ -55,7 +55,7 @@ const InstrumentoDetalle = () => {
                 Costo de Envío Interior de Argentina: ${instrumento.costoEnvio}
               </p>
             )}
-          </p>
+          </div>
 
           <button className="agregar-btn">Agregar al carrito</button>
         </div>
