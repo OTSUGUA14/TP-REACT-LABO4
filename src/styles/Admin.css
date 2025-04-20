@@ -1,0 +1,92 @@
+.container {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
+  
+  .row:first-of-type {
+    font-weight: bold;
+  }
+  
+  .col {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  .new-item {
+    margin-bottom: 20px;
+    background-color: #007bff;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  .delete{
+    margin-bottom: 20px;
+    background-color: red;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  .modify{
+    margin-bottom: 20px;
+    background-color: #007bff;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: left;
+  }
+  
+  .modal-content h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .modal-content input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 6px;
+    box-sizing: border-box;
+  }
+  
+  .modal-content button {
+    margin-top: 10px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-content .cancel-btn {
+    margin-left: 10px;
+    background-color: #ccc;
+  }
+  

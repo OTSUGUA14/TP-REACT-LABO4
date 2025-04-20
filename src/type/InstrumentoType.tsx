@@ -7,5 +7,6 @@ export interface instrumentoType {
     precio: number,
     costoEnvio: string,
     cantidadVendida: number,
-    descripcion: string
+    descripcion: string,
+    idCategoria: string
 }

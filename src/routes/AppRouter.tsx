@@ -1,10 +1,10 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Home from "../screens/Home";
 import DondeEstamos from "../screens/DondeEstamos";
 import Productos from "../screens/Productos";
 import InstrumentoDetalle from "../screens/DetalleInstrumento";
+import Admin from "../screens/Admin";
 
 export function AppRouter() {
   return (
@@ -15,6 +15,7 @@ export function AppRouter() {
         <Route path="/donde-estamos" element={<DondeEstamos />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/instrumento/:id" element={<InstrumentoDetalle />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </>
   );

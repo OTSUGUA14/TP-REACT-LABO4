@@ -1,10 +1,10 @@
-import Instrumentos from "../components/Instrumentos";
+import InstrumentosListado from "../components/InstrumentosListado";
 
 const Productos = () => {
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>Productos Disponibles</h1>
-      <Instrumentos />
+      <center><h1>Productos Disponibles</h1></center>
+      <InstrumentosListado />
     </div>
   );
 };

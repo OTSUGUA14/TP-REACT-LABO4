@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Instrumento from './Instrumento';
+import InstrumentoListado from './InstrumentoListado';
 import { instrumentoType } from '../type/InstrumentoType';
 
-export const Instrumentos = () => {
+export const InstrumentosListado = () => {
   const [instrumentos, setInstrumentos] = useState<instrumentoType[]>([]);
 
   useEffect(() => {
@@ -14,13 +14,13 @@ export const Instrumentos = () => {
   }, []);
   return (
     <div>
-      <h1>INSTRUMENTOS MUSICALES</h1>
+      <center><h1>INSTRUMENTOS MUSICALES</h1></center>
       {instrumentos.map((instrumento) => (
-        <Instrumento key={instrumento.id} instrumento={instrumento} />
+        <InstrumentoListado key={instrumento.id} instrumento={instrumento} />
       ))}
 
     </div>
   );
 };
 
-export default Instrumentos
+export default InstrumentosListado

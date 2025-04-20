@@ -1,11 +1,10 @@
-import { FC } from "react";
 import { instrumentoType } from "../type/InstrumentoType";
-import "../styles/Instrumento.css";
+import "../styles/InstrumentoListado.css";
 import { Link } from 'react-router-dom';
 interface Props {
   instrumento: instrumentoType;
 }
-const Instrumento = ({ instrumento }: Props) => {
+const InstrumentoListado = ({ instrumento }: Props) => {
   return (
     <div className="card" id={instrumento.id}>
       <img
@@ -33,10 +32,9 @@ const Instrumento = ({ instrumento }: Props) => {
         </div>
 
         <p className="vendidos">{instrumento.cantidadVendida} vendidos</p>
-        {/* <p className="descripcion">{instrumento.descripcion}</p> */}
       </div>
     </div>
   );
 };
 
-export default Instrumento;
+export default InstrumentoListado;
