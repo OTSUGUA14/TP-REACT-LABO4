@@ -8,5 +8,6 @@ public record InstrumentoDTO (
     double precio,
     String costoEnvio,
     int cantidadVendida,
-    String descripcion
+    String descripcion,
+    Long idCategoria
 ){}
