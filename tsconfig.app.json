@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/components/InstrumentoListado.tsx"]
+  "include": ["src", "src/components/InstrumentoCard.tsx"]
 }

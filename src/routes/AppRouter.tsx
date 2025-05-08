@@ -5,6 +5,10 @@ import DondeEstamos from "../screens/DondeEstamos";
 import Productos from "../screens/Productos";
 import InstrumentoDetalle from "../screens/DetalleInstrumento";
 import Admin from "../screens/Admin";
+import CarritoPage from "../screens/CarritoPage";
+
+// dentro de tus <Routes>
+
 
 export function AppRouter() {
   return (
@@ -16,6 +20,7 @@ export function AppRouter() {
         <Route path="/productos" element={<Productos />} />
         <Route path="/instrumento/:id" element={<InstrumentoDetalle />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/carrito" element={<CarritoPage />} />
       </Routes>
     </>
   );

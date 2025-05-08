@@ -1,21 +1,18 @@
-
-import './App.css'
-
-
-import { BrowserRouter } from 'react-router-dom'
+import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 import { AppRouter } from './routes/AppRouter';
-
+import { CarritoProvider } from './context/CarritoContext'; 
 
 function App() {
-
   return (
     <BrowserRouter>
-      <div className='bg-gray-100'>
-
-        <AppRouter></AppRouter>
-      </div>
+      <CarritoProvider> 
+        <div className='bg-gray-100'>
+          <AppRouter />
+        </div>
+      </CarritoProvider>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -3,9 +3,15 @@ import { instrumentoType } from '../type/InstrumentoType';
 import InstrumentoAdmin from './InstrumentoAdmin';
 import "../styles/Admin.css";
 
+// Componente principal para administrar instrumentos
 export const InstrumentosAdmin = () => {
+  // Estado que contiene todos los instrumentos traídos del backend
   const [instrumentos, setInstrumentos] = useState<instrumentoType[]>([]);
+
+  // Controla si el modal de creación/modificación está visible
   const [showModal, setShowModal] = useState(false);
+
+  // Estado para los datos del formulario
   const [formData, setFormData] = useState({
     instrumento: "",
     marca: "",
@@ -17,8 +23,11 @@ export const InstrumentosAdmin = () => {
     descripcion: "",
     idCategoria: 0
   });
+
+  // Si se está modificando un instrumento, se guarda aquí
   const [instrumentoToModify, setInstrumentoToModify] = useState<instrumentoType | null>(null);
 
+  // Cargar instrumentos desde el backend al montar el componente
   useEffect(() => {
     fetch('http://localhost:8080/instrumentos/getAll')
       .then((response) => response.json())
@@ -26,6 +35,7 @@ export const InstrumentosAdmin = () => {
       .catch((error) => console.error('Error al cargar los datos:', error));
   }, []);
 
+  // Maneja los cambios en los inputs del formulario
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -36,17 +46,18 @@ export const InstrumentosAdmin = () => {
     });
   };
 
+  // Maneja el envío del formulario, ya sea para agregar o modificar
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Se ajusta el costo de envío antes de enviar (convierte 0 en "G")
     const dataToSend = {
       ...formData,
       costoEnvio: formData.costoEnvio === 0 ? "G" : Number(formData.costoEnvio)
     };
-    
 
     if (instrumentoToModify) {
-      // PATCH request to update the instrument
+      // Si hay un instrumento para modificar, hace PATCH
       fetch(`http://localhost:8080/instrumentos/patch/${instrumentoToModify.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -62,7 +73,7 @@ export const InstrumentosAdmin = () => {
         })
         .catch((err) => console.error(err));
     } else {
-      // POST request to add a new instrument
+      // Si no hay instrumento seleccionado, se hace POST para crear uno nuevo
       fetch('http://localhost:8080/instrumentos/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -80,6 +91,7 @@ export const InstrumentosAdmin = () => {
     }
   };
 
+  // Prepara el formulario para modificar un instrumento existente
   const handleModifyClick = (instrumento: instrumentoType) => {
     setInstrumentoToModify(instrumento);
     setFormData({
@@ -93,20 +105,22 @@ export const InstrumentosAdmin = () => {
       descripcion: instrumento.descripcion,
       idCategoria: Number(instrumento.idCategoria),
     });    
-    setShowModal(true);  // Show the modal
+    setShowModal(true);  // Abre el modal
   };
 
   return (
     <div className="container text-center">
       <br />
+      {/* Botón para abrir el modal de nuevo instrumento */}
       <a className="new-item" onClick={() => setShowModal(true)}>Nuevo</a>
 
-      {/* Modal */}
+      {/* Modal para crear o modificar un instrumento */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h4>{instrumentoToModify ? "Modificar Instrumento" : "Nuevo Instrumento"}</h4>
             <form autoComplete='off' onSubmit={handleSubmit} >
+              {/* Inputs del formulario para cada campo */}
               <label htmlFor="instrumento">Instrumento</label>
               <input
                 type="text"
@@ -202,6 +216,8 @@ export const InstrumentosAdmin = () => {
                 <option value="4">Teclado</option>
                 <option value="5">Electrónico</option>
               </select>
+
+              {/* Botones de acción del formulario */}
               <button type="submit">Enviar</button>
               <button type="button" onClick={() => setShowModal(false)} className="cancel-btn">
                 Cancelar
@@ -211,6 +227,7 @@ export const InstrumentosAdmin = () => {
         </div>
       )}
 
+      {/* Cabecera de la tabla de instrumentos */}
       <div className="row">
         <div className="col"><b>ID</b></div>
         <div className="col"><b>Instrumento</b></div>
@@ -226,6 +243,7 @@ export const InstrumentosAdmin = () => {
         <div className="col"><b>Eliminar</b></div>
       </div>
 
+      {/* Lista de instrumentos con opciones de modificar/eliminar */}
       {instrumentos.map((instrumento) => (
         <InstrumentoAdmin
           key={instrumento.id}

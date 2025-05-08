@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .detalle-container {
     padding: 2rem;
   }
@@ -52,13 +58,16 @@
     height: 24px;
   }
   
-  .agregar-btn {
+  .agregar-btn, .agregar-carrito-btn {
     background-color: #007bff;
-    color: white;
+    color: black;
     padding: 0.75rem;
-    border: none;
+    border: 1px solid #000;
     border-radius: 4px;
     cursor: pointer;
     width: fit-content;
   }
   
+  .agregar-carrito-btn {
+    background-color: rgb(157, 255, 127);
+  }
