@@ -13,13 +13,15 @@ const CarritoPage = () => {
   // Función para guardar el carrito como un pedido
   const guardarCarrito = async () => {
     const pedido = {
-      productos: carrito,
-      fecha: new Date().toISOString(), // Fecha actual en formato ISO
-      total
+      detalles: carrito.map(p => ({
+        cantidad: p.cantidad,
+        instrumento: {
+          id: p.id // Asegúrate que `p.id` corresponde al ID del instrumento en tu base de datos
+        }
+      }))
     };
-
+  
     try {
-      // Envia el pedido al backend
       const response = await fetch('http://localhost:8080/api/pedidos', {
         method: 'POST',
         headers: {
@@ -27,15 +29,14 @@ const CarritoPage = () => {
         },
         body: JSON.stringify(pedido)
       });
-
-      // Si la respuesta no es exitosa, lanza un error
+  
       if (!response.ok) throw new Error('Error al guardar el pedido');
-
-      const data = await response.json(); // Obtiene la respuesta del backend
-      setMensaje(`El pedido con id ${data.id} se guardó correctamente`); // Muestra mensaje de éxito
-      limpiarCarrito(); // Vacía el carrito
+  
+      const data = await response.json();
+      setMensaje(`El pedido con id ${data.id} se guardó correctamente`);
+      limpiarCarrito();
     } catch (error) {
-      setMensaje('Hubo un error al guardar el pedido'); // Muestra mensaje de error
+      setMensaje('Hubo un error al guardar el pedido');
       console.error(error);
     }
   };
