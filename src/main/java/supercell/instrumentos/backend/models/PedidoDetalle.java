@@ -1,5 +1,7 @@
 package supercell.instrumentos.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +20,7 @@ public class PedidoDetalle {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
+    @JsonIgnore
     private Pedido pedido;
 
     // Constructor vacío
