@@ -42,9 +42,16 @@ public class InstrumentoController {
 
     // Conseguir instrumento individual
     @GetMapping("/{ID}")
-    public Optional<Instrumento> getInstrumento(@PathVariable Long ID){
-        return instrumentoService.getInstrumento(ID);
+    public ResponseEntity<Instrumento> getInstrumento(@PathVariable("ID") Long ID){
+        Optional<Instrumento> instrumento = instrumentoService.getInstrumento(ID);
+        if (instrumento.isPresent()) {
+            return ResponseEntity.ok(instrumento.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
+
+
 
     // Agregar instrumento
 
