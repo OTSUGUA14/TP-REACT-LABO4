@@ -18,7 +18,7 @@ public class MercadoPagoController {
     
     public PreferenceMP getPreferenciaIdMercadoPago(Pedido pedido){
         try {
-            MercadoPagoConfig.setAccessToken("APP_USR-1544348409559091-051415-91745b799894918305be6ceedb54f344-205323963");
+            MercadoPagoConfig.setAccessToken("APP_USR-1544348409559091-051415-91745b799894918305be6ceedb54f344-2053239638");
             PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                .id("1234")
                .title(pedido.getTitulo())
