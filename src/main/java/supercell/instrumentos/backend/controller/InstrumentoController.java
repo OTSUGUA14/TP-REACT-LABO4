@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import supercell.instrumentos.backend.models.Instrumento;
+import supercell.instrumentos.backend.models.Pedido;
 import supercell.instrumentos.backend.payload.InstrumentoDTO;
 import supercell.instrumentos.backend.service.InstrumentoService;
 
@@ -71,5 +72,11 @@ public class InstrumentoController {
     public ResponseEntity<Instrumento> patchInstrumento(@PathVariable Long ID, @RequestBody InstrumentoDTO instrumentoDTO){
         Instrumento nuevoInstrumento = instrumentoService.patchInstrumento(ID, instrumentoDTO);
         return ResponseEntity.ok(nuevoInstrumento);
+    }
+    @PostMapping("api/create_preference_mp")
+    public PreferenceMP crearPreferenciaMercadoPago(@RequestBody Pedido pedido){
+        MercadoPagoController cMercadoPago = new MercadoPagoController();
+        PreferenceMP preference = cMercadoPago.getPreferenciaIdMercadoPago(pedido);
+        return preference;
     }
 }

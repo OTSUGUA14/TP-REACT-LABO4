@@ -15,6 +15,8 @@ public class Pedido {
     private LocalDate fechaPedido;
 
     private Double totalPedido;
+    private String titulo;
+    private double montoTotal;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<PedidoDetalle> detalles = new ArrayList<>();
@@ -50,4 +52,20 @@ public class Pedido {
     public void setDetalles(List<PedidoDetalle> detalles) {
         this.detalles = detalles;
     }
+      public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public double getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(double montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+    
 }
