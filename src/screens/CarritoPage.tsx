@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useCarrito } from '../context/CarritoContext';
 import '../styles/Carrito.css';
+import { InstrumentoPedido, Pedido, PedidoDetalle } from '../models/Pedido';
+import CheckoutMP from '../components/ChekoutMP';
 
 const CarritoPage = () => {
   // Accede al carrito y la función para limpiarlo desde el contexto
@@ -12,26 +14,24 @@ const CarritoPage = () => {
 
   // Función para guardar el carrito como un pedido
   const guardarCarrito = async () => {
-    const pedido = {
-      detalles: carrito.map(p => ({
-        cantidad: p.cantidad,
-        instrumento: {
-          id: p.id // Asegúrate que `p.id` corresponde al ID del instrumento en tu base de datos
-        }
-      }))
-    };
-  
+    const pedido = new Pedido(
+      carrito.map(p => new PedidoDetalle(
+        new InstrumentoPedido(p.id), // solo pasás el ID
+        p.cantidad
+      ))
+    );
+
     try {
-      const response = await fetch('http://localhost:8080/api/pedidos', {
+      const response = await fetch('http://localhost:8080/instrumentos/api/pedidos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(pedido)
       });
-  
+
       if (!response.ok) throw new Error('Error al guardar el pedido');
-  
+
       const data = await response.json();
       setMensaje(`El pedido con id ${data.id} se guardó correctamente`);
       limpiarCarrito();
@@ -61,6 +61,7 @@ const CarritoPage = () => {
 
       {/* Muestra el mensaje si existe */}
       {mensaje && <p className="mensaje">{mensaje}</p>}
+      <CheckoutMP montoCarrito={total} ></CheckoutMP>
     </div>
   );
 };

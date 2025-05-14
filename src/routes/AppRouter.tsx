@@ -15,7 +15,7 @@ export function AppRouter() {
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="*" element={<Home />} />
         <Route path="/donde-estamos" element={<DondeEstamos />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/instrumento/:id" element={<InstrumentoDetalle />} />

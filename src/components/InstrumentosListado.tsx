@@ -1,7 +1,7 @@
 // Importa los hooks de React y componentes necesarios
 import { useEffect, useState } from 'react';
 import InstrumentoCard from './InstrumentoCard';
-import { instrumentoType } from '../type/InstrumentoType';
+import { instrumentoType } from '../models/InstrumentoType';
 
 export const InstrumentosListado = () => {
   // Estado local para almacenar la lista de instrumentos

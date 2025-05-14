@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { instrumentoType } from "../type/InstrumentoType";
+import { instrumentoType } from "../models/InstrumentoType";
 import "../styles/InstrumentoDetalle.css";
 import { useCarrito } from '../context/CarritoContext'; 
 

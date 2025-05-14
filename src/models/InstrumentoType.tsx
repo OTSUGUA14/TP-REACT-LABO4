@@ -11,17 +11,3 @@ export interface instrumentoType {
     idCategoria: string;
 }
 
-export interface InstrumentoPedido {
-    id: number;
-    instrumento: string;
-    precio: number;
-}
-
-export interface PedidoDetalle {
-    instrumento: InstrumentoPedido;
-    cantidad: number;
-}
-
-export interface Pedido {
-    detalles: PedidoDetalle[];
-}

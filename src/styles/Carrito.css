@@ -53,3 +53,10 @@
     font-weight: bold;
     color: green;
 }
+.divVisible{
+    visibility:visible;
+}
+
+.divInvisible{
+    visibility:hidden;
+}

@@ -1,4 +1,4 @@
-import { instrumentoType } from "../type/InstrumentoType";
+import { instrumentoType } from "../models/InstrumentoType";
 import "../styles/InstrumentoListado.css";
 import { Link } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';

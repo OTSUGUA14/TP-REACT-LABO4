@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { instrumentoType } from '../type/InstrumentoType';
+import { instrumentoType } from '../models/InstrumentoType';
 import InstrumentoAdmin from './InstrumentoAdmin';
 import "../styles/Admin.css";
 
