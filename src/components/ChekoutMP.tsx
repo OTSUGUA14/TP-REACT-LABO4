@@ -22,7 +22,7 @@ function CheckoutMP({ montoCarrito = 0 }) {
 
 
     //es la Public Key se utiliza generalmente en el frontend.
-    initMercadoPago('APP_USR-ac7f1fa9-31f9-4724-a08d-9ea32600a656', { locale: 'es-AR' });
+    initMercadoPago('APP_USR-c6496d8a-6ffe-4a98-abde-aedc89b989b7', { locale: 'es-AR' });
 
     //redirectMode es optativo y puede ser self, blank o modal
     return (
