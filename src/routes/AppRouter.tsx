@@ -6,8 +6,7 @@ import Productos from "../screens/Productos";
 import InstrumentoDetalle from "../screens/DetalleInstrumento";
 import Admin from "../screens/Admin";
 import CarritoPage from "../screens/CarritoPage";
-
-// dentro de tus <Routes>
+import Login from "../screens/Login";
 
 
 export function AppRouter() {
@@ -15,7 +14,8 @@ export function AppRouter() {
     <>
       <NavBar />
       <Routes>
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/donde-estamos" element={<DondeEstamos />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/instrumento/:id" element={<InstrumentoDetalle />} />

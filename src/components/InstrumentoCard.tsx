@@ -2,6 +2,7 @@ import { instrumentoType } from "../models/InstrumentoType";
 import "../styles/InstrumentoListado.css";
 import { Link } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
+import { toast } from 'react-toastify';
 
 // Define la estructura de las props que recibe el componente
 interface Props {
@@ -20,6 +21,16 @@ const InstrumentoCard = ({ instrumento }: Props) => {
       precio: instrumento.precio,
       cantidad: 1
     });
+      toast.success(`${instrumento.instrumento} agregado al carrito 🛒`, {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+  });
   };
 
   return (
