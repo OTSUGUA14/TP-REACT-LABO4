@@ -20,7 +20,7 @@ public class MercadoPagoController {
         try {
             MercadoPagoConfig.setAccessToken("APP_USR-5808544844698208-051510-6264c6c45bd16af4b067e869f6cb9357-2439047893"); 
             PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
-                .id(pedido.getId())
+                .id(String.valueOf(pedido.getId()))
                 .title(pedido.getTitulo())
                 .description("Pedido realizado desde el carrito de compras")
                 .pictureUrl("https://img-global.cpcdn.com/recipes/0709fbb52d87d2d7/1200x630cq70/photo.jpg")

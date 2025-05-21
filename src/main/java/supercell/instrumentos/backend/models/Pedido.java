@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "pedido") 
 public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id; 
+
 
     private LocalDate fechaPedido;
 
@@ -25,7 +27,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
