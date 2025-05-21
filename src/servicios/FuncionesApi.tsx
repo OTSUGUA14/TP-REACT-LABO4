@@ -1,84 +1,16 @@
 import PreferenceMP from "../entidades/mercadopago/PreferenceMP";
-import Ingrediente from "../entidades/Ingrediente";
-import Pedido from "../entidades/Pedido";
-import Plato from "../entidades/Plato";
 
-export async function getPlatosJSONFetch(){
+import Pedido from "../entidades/Pedido";
+import { InstrumentoType } from "../models/InstrumentoType";
+
+
+export async function getPlatosJSONFetch() {
 	const urlServer = 'http://localhost:8080/api/platos';
 	const response = await fetch(urlServer, {
 		method: 'GET',
-        headers: {
-			'Content-type': 'application/json',
-			'Access-Control-Allow-Origin':'*'
-		},
-        mode: 'cors'
-	});
-	console.log(response);
-	return await response.json();
-}
-
-export async function getPlatoXIdFecth(id:number){
-	const urlServer = 'http://localhost:8080/api/platoxid/'+id;
-    console.log(urlServer);
-	const response = await fetch(urlServer, {
-		method: 'GET',
-        headers: {
-			'Content-type': 'application/json',
-			'Access-Control-Allow-Origin':'*'
-		},
-        mode: 'cors'
-	});
-	return await response.json() as Plato;
-    
-}
-
-export async function deletePlatoXId(id:number){
-	
-	let urlServer = 'http://localhost:8080/api/eliminar/'+id;
-	await fetch(urlServer, {
-		method: 'GET',
-        headers: {
-			'Content-type': 'application/json',
-			'Access-Control-Allow-Origin':'*'
-		},
-        mode: 'cors'
-	});
-}
-
-export async function getPlatosXBusqueda(termino:String){
-	let urlServer = 'http://localhost:8080/api/buscar/'+termino;
-	let response = await fetch(urlServer, {
-		method: 'GET',
-        headers: {
-			'Content-type': 'application/json',
-			'Access-Control-Allow-Origin':'*'
-		},
-        mode: 'cors'
-	});
-	console.log(response);
-	return await response.json();
-}
-
-export async function getIngredienteXIdFetch(id:number){
-	let urlServer = 'http://localhost:8080/api/ingredientexid/'+id;
-	let response = await fetch(urlServer, {
-		method: 'GET',
-        headers: {
-			'Content-type': 'application/json',
-			'Access-Control-Allow-Origin':'*'
-		},
-        mode: 'cors'
-	});
-	return await response.json() as Ingrediente;
-}
-
-export async function getIngredientesDataBaseJSON(){
-	let urlServer = 'http://localhost:8080/api/ingredientes';
-	let response = await fetch(urlServer, {
-		method: 'GET',
 		headers: {
 			'Content-type': 'application/json',
-			'Access-Control-Allow-Origin':'*'
+			'Access-Control-Allow-Origin': '*'
 		},
 		mode: 'cors'
 	});
@@ -86,55 +18,98 @@ export async function getIngredientesDataBaseJSON(){
 	return await response.json();
 }
 
-export async function savePlato(plato?: Plato) {
-	let urlServer = 'http://localhost:8080/api/insert';
-	let method:string = "POST";
-	if(plato && plato.id > 0){
-		urlServer = 'http://localhost:8080/api/update';
-		method = "PUT";
-	}
+export async function deletePlatoXId(id: number) {
+
+	let urlServer = 'http://localhost:8080/api/eliminar/' + id;
 	await fetch(urlServer, {
-	  "method": method,
-	  "body": JSON.stringify(plato),
-	  "headers": {
-		"Content-Type": 'application/json'
-	  }
+		method: 'GET',
+		headers: {
+			'Content-type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		},
+		mode: 'cors'
 	});
 }
 
-export async function getIngredienteXCodigo(codigo:string){
-	let urlServer = 'http://localhost:8080/api/ingredientexcodigo/'+codigo;
+export async function getPlatosXBusqueda(termino: String) {
+	let urlServer = 'http://localhost:8080/api/buscar/' + termino;
 	let response = await fetch(urlServer, {
 		method: 'GET',
-        headers: {
+		headers: {
 			'Content-type': 'application/json',
-			'Access-Control-Allow-Origin':'*'
+			'Access-Control-Allow-Origin': '*'
 		},
-        mode: 'cors'
+		mode: 'cors'
 	});
-    return await response.json() as Ingrediente;    
+	console.log(response);
+	return await response.json();
 }
 
 
-export function getPlatosJSON(){
-
-    const datos:Plato[] = [];
-	
-	return datos
-	
+export async function getIngredientesDataBaseJSON() {
+	let urlServer = 'http://localhost:8080/api/ingredientes';
+	let response = await fetch(urlServer, {
+		method: 'GET',
+		headers: {
+			'Content-type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		},
+		mode: 'cors'
+	});
+	console.log(response);
+	return await response.json();
 }
 
 
 
-export async function createPreferenceMP(pedido?:Pedido){
-    let urlServer = 'http://localhost:8080/instrumentos/api/create_preference_mp';
-	let method:string = "POST";
-    const response = await fetch(urlServer, {
-	  "method": method,
-	  "body": JSON.stringify(pedido),
-	  "headers": {
-		"Content-Type": 'application/json'
-	  }
+
+
+
+
+
+export async function createPreferenceMP(pedido?: Pedido) {
+	let urlServer = 'http://localhost:8080/instrumentos/api/create_preference_mp';
+	let method: string = "POST";
+	const response = await fetch(urlServer, {
+		"method": method,
+		"body": JSON.stringify(pedido),
+		"headers": {
+			"Content-Type": 'application/json'
+		}
 	});
-    return await response.json() as PreferenceMP;   
-}   
+	return await response.json() as PreferenceMP;
+}
+
+export async function obtenerPedidosAgrupadosPorMes() {
+	const url = 'http://localhost:8080/api/pedidos/agrupados-por-mes';
+	const res = await fetch(url);
+	return await res.json();
+}
+
+export async function obtenerVentasPorInstrumento() {
+	const url = 'http://localhost:8080/api/pedidos/ventas-por-instrumento';
+	const res = await fetch(url);
+	return await res.json();
+}
+
+export const crearPedido = async (pedido: any) => {
+	const response = await fetch("http://localhost:8080/api/pedidos", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(pedido)
+	});
+
+	if (!response.ok) {
+		throw new Error("Error al crear el pedido");
+	}
+
+	return await response.json();
+};
+
+export async function instrumentosTodos() {
+	const url = ("http://localhost:8080/instrumentos/getAll");
+	const res = await fetch(url);
+	return await res.json();
+}

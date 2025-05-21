@@ -14,6 +14,7 @@ const NavBar = () => {
         <li><Link to="/home">Home</Link></li>
         <li><Link to="/donde-estamos">Dónde Estamos</Link></li>
         <li><Link to="/productos">Productos</Link></li>
+        <li><Link to="/estadisticas">Estadisticas</Link></li>
         {rol === "ADMIN" && (
           <li><Link to="/admin">Admin</Link></li>
         )}

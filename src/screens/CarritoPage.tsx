@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCarrito } from '../context/CarritoContext';
 import '../styles/Carrito.css';
-import { InstrumentoPedido, Pedido, PedidoDetalle } from '../models/Pedido';
+import { InstrumentoPedido, PedidoCart, PedidoDetalle } from '../models/PedidoCart';
 import CheckoutMP from '../components/ChekoutMP';
 
 const CarritoPage = () => {
@@ -13,13 +13,15 @@ const CarritoPage = () => {
   const total = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
 
   // Función para guardar el carrito como un pedido
-  const guardarCarrito = async () => {
-    const pedido = new Pedido(
-      carrito.map(p => new PedidoDetalle(
-        new InstrumentoPedido(p.id), // solo pasás el ID
-        p.cantidad
-      ))
-    );
+ const guardarCarrito = async () => {
+  const pedido = new PedidoCart(
+    carrito.map(p => new PedidoDetalle(
+      new InstrumentoPedido(p.id), // solo pasás el ID
+      p.cantidad
+    )),
+    new Date().toISOString() // ⬅️ fecha en formato estándar ISO (ideal para backend)
+  );
+
 
     try {
       const response = await fetch('http://localhost:8080/instrumentos/api/pedidos', {
@@ -61,7 +63,7 @@ const CarritoPage = () => {
 
       {/* Muestra el mensaje si existe */}
       {mensaje && <p className="mensaje">{mensaje}</p>}
-      <CheckoutMP montoCarrito={total} ></CheckoutMP>
+      <CheckoutMP montoCarrito={total} itemsCarrito={carrito} ></CheckoutMP>
     </div>
   );
 };

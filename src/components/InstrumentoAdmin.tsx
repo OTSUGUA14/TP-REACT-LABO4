@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { instrumentoType } from "../models/InstrumentoType";
+import { InstrumentoType } from "../models/InstrumentoType";
 
 interface Props {
-    instrumento: instrumentoType;
-    onModify: (instrumento: instrumentoType) => void;
+    instrumento: InstrumentoType;
+    onModify: (instrumento: InstrumentoType) => void;
 }
 
 const InstrumentoAdmin = ({ instrumento, onModify }: Props) => {
@@ -35,7 +35,8 @@ const InstrumentoAdmin = ({ instrumento, onModify }: Props) => {
 
 
     return (
-        <div className="row" id={instrumento.id}>
+        <div className="row" id={instrumento.id.toString()}>
+
             <div className="col">
                 {instrumento.id}
             </div>
@@ -80,7 +81,7 @@ const InstrumentoAdmin = ({ instrumento, onModify }: Props) => {
                 <a className="modify" onClick={() => onModify(instrumento)}>Modificar</a>
             </div>
             <div className="col">
-                <a className="delete" onClick={() => deleteInstrumento(instrumento.id)}>Eliminar</a>
+                <a className="delete" onClick={() => deleteInstrumento(instrumento.id.toString())}>Eliminar</a>
             </div>
         </div>
     );

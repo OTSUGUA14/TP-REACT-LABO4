@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { instrumentoType } from "../models/InstrumentoType";
+import { InstrumentoType } from "../models/InstrumentoType";
 import "../styles/InstrumentoDetalle.css";
 import { useCarrito } from '../context/CarritoContext'; 
 
@@ -13,7 +13,7 @@ const InstrumentoDetalle = () => {
   console.log("Param recibido:", id);
 
   // Estado para almacenar el instrumento cargado y para manejar errores
-  const [instrumento, setInstrumento] = useState<instrumentoType | null>(null);
+  const [instrumento, setInstrumento] = useState<InstrumentoType | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const InstrumentoDetalle = () => {
     if (!instrumento) return; // Si no hay instrumento, no hacer nada
 
     agregarProducto({
-      id: parseInt(instrumento.id), // Asegura que el id sea un número entero
+      id: (instrumento.id), // Asegura que el id sea un número entero
       nombre: instrumento.instrumento,
       precio: instrumento.precio,
       cantidad: 1 // Se agrega una cantidad inicial de 1

@@ -7,6 +7,7 @@ import InstrumentoDetalle from "../screens/DetalleInstrumento";
 import Admin from "../screens/Admin";
 import CarritoPage from "../screens/CarritoPage";
 import Login from "../screens/Login";
+import Estadisticas from "../screens/Estadisticas";
 
 
 export function AppRouter() {
@@ -17,6 +18,7 @@ export function AppRouter() {
         <Route path="*" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/donde-estamos" element={<DondeEstamos />} />
+        <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/instrumento/:id" element={<InstrumentoDetalle />} />
         <Route path="/admin" element={<Admin />} />

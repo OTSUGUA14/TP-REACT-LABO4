@@ -13,8 +13,9 @@ export class PedidoDetalle {
     ) { }
 }
 
-export class Pedido {
+export class PedidoCart {
     constructor(
-        public detalles: PedidoDetalle[]
+        public detalles: PedidoDetalle[],
+          public fecha: string // ⬅️ importante para agrupar por mes/año
     ) { }
 }
