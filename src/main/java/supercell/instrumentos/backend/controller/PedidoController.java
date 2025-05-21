@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 
 import supercell.instrumentos.backend.models.Pedido;
 import supercell.instrumentos.backend.payload.PedidosPorMesDTO;
+import supercell.instrumentos.backend.payload.VentasPorInstrumentoDTO;
 import supercell.instrumentos.backend.service.PedidoService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,4 +30,12 @@ public class PedidoController {
     public ResponseEntity<List<PedidosPorMesDTO>> obtenerPedidosAgrupados() {
         return ResponseEntity.ok(pedidoService.obtenerPedidosAgrupadosPorMesYAnio());
     }
+
+    @GetMapping("/ventas-por-instrumento")
+    public ResponseEntity<List<VentasPorInstrumentoDTO>> obtenerVentasPorInstrumento() {
+        return ResponseEntity.ok(pedidoService.obtenerVentasPorInstrumento());
+    }
+
+ 
+
 }
