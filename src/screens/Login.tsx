@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUser } from "../context/UserContext";
 import { agregarUsuario, verificarUsuario } from "../servicios/FuncionesApi";
+import "../styles/Login.css"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const Login = () => {
 
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: "2rem" }}>
+    <div className="containerLogin">
       <h2>Iniciar sesión</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -80,18 +81,11 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" style={{ marginTop: "1.5rem" }}>Login</button>
+        <button type="submit" className="buttonForm buttonLogin">Login</button>
       </form>
 
-      <button
-        style={{
-          marginTop: "1rem",
-          backgroundColor: "#ccc",
-          border: "none",
-          padding: "0.5rem 1rem",
-          cursor: "pointer",
-        }}
-        onClick={handleRegister} // <--- Aquí está el cambio
+      <button className="buttonForm"
+        onClick={handleRegister}
       >
         Crear cuenta
       </button>
