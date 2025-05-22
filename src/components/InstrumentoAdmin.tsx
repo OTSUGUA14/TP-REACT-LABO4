@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { InstrumentoType } from "../models/InstrumentoType";
+import { deleteInstrumento } from "../servicios/FuncionesApi";
 
 interface Props {
     instrumento: InstrumentoType;
@@ -26,12 +27,6 @@ const InstrumentoAdmin = ({ instrumento, onModify }: Props) => {
         }
     };
 
-    const deleteInstrumento = async (idInstumento: string) => {
-        await fetch(`http://localhost:8080/instrumentos/delete/${idInstumento}`, {
-            method: 'DELETE'
-        });
-        window.location.reload();
-    };
 
 
     return (

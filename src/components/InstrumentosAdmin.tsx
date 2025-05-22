@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { instrumentoType } from '../models/InstrumentoType';
+import { InstrumentoType } from '../models/InstrumentoType';
 import InstrumentoAdmin from './InstrumentoAdmin';
 import "../styles/Admin.css";
+import { crearInstrumento, instrumentosTodos, modificarInstrumento } from '../servicios/FuncionesApi';
 
 // Componente principal para administrar instrumentos
 export const InstrumentosAdmin = () => {
   // Estado que contiene todos los instrumentos traídos del backend
-  const [instrumentos, setInstrumentos] = useState<instrumentoType[]>([]);
+  const [instrumentos, setInstrumentos] = useState<InstrumentoType[]>([]);
 
   // Controla si el modal de creación/modificación está visible
   const [showModal, setShowModal] = useState(false);
@@ -25,14 +26,13 @@ export const InstrumentosAdmin = () => {
   });
 
   // Si se está modificando un instrumento, se guarda aquí
-  const [instrumentoToModify, setInstrumentoToModify] = useState<instrumentoType | null>(null);
+  const [instrumentoToModify, setInstrumentoToModify] = useState<InstrumentoType | null>(null);
 
   // Cargar instrumentos desde el backend al montar el componente
   useEffect(() => {
-    fetch('http://localhost:8080/instrumentos/getAll')
-      .then((response) => response.json())
-      .then((data) => setInstrumentos(data))
-      .catch((error) => console.error('Error al cargar los datos:', error));
+    instrumentosTodos()
+      .then(data => setInstrumentos(data))
+      .catch(error => console.error('Error al cargar los datos:', error));
   }, []);
 
   // Maneja los cambios en los inputs del formulario
@@ -47,52 +47,33 @@ export const InstrumentosAdmin = () => {
   };
 
   // Maneja el envío del formulario, ya sea para agregar o modificar
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Se ajusta el costo de envío antes de enviar (convierte 0 en "G")
     const dataToSend = {
       ...formData,
       costoEnvio: formData.costoEnvio === 0 ? "G" : Number(formData.costoEnvio)
     };
 
-    if (instrumentoToModify) {
-      // Si hay un instrumento para modificar, hace PATCH
-      fetch(`http://localhost:8080/instrumentos/patch/${instrumentoToModify.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dataToSend),
-      })
-        .then((res) => {
-          if (res.ok) {
-            alert("Instrumento modificado");
-            window.location.reload();
-          } else {
-            alert("Error al modificar");
-          }
-        })
-        .catch((err) => console.error(err));
-    } else {
-      // Si no hay instrumento seleccionado, se hace POST para crear uno nuevo
-      fetch('http://localhost:8080/instrumentos/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dataToSend),
-      })
-        .then((res) => {
-          if (res.ok) {
-            alert("Instrumento enviado (ficticio)");
-            window.location.reload();
-          } else {
-            alert("Error al enviar");
-          }
-        })
-        .catch((err) => console.error(err));
+    try {
+      if (instrumentoToModify) {
+        await modificarInstrumento(instrumentoToModify.id, dataToSend);
+        alert("Instrumento modificado");
+      } else {
+        await crearInstrumento(dataToSend);
+        alert("Instrumento enviado (ficticio)");
+      }
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      alert("Hubo un error al procesar el instrumento");
     }
   };
 
+
   // Prepara el formulario para modificar un instrumento existente
-  const handleModifyClick = (instrumento: instrumentoType) => {
+  const handleModifyClick = (instrumento: InstrumentoType) => {
     setInstrumentoToModify(instrumento);
     setFormData({
       instrumento: instrumento.instrumento,
@@ -104,7 +85,7 @@ export const InstrumentosAdmin = () => {
       cantidadVendida: instrumento.cantidadVendida,
       descripcion: instrumento.descripcion,
       idCategoria: Number(instrumento.idCategoria),
-    });    
+    });
     setShowModal(true);  // Abre el modal
   };
 

@@ -1,5 +1,5 @@
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import { createPreferenceMP } from '../servicios/FuncionesApi';
+import { crearPedido, createPreferenceMP } from '../servicios/FuncionesApi';
 import { useState } from 'react';
 import PreferenceMP from '../entidades/mercadopago/PreferenceMP';
 import { ProductoCarrito } from '../context/CarritoContext'; // o desde donde lo tengas definido
@@ -22,7 +22,7 @@ function CheckoutMP({ montoCarrito, itemsCarrito }: CheckoutMPProps) {
 
         // Armamos los detalles del pedido a partir del carrito
         const detalles: PedidoDetalle[] = itemsCarrito.map(item => {
-           const instrumento = new InstrumentoPedido(item.id);
+            const instrumento = new InstrumentoPedido(item.id);
 
 
             return new PedidoDetalle(instrumento, item.cantidad);
@@ -40,20 +40,11 @@ function CheckoutMP({ montoCarrito, itemsCarrito }: CheckoutMPProps) {
         };
 
         try {
-            // 1. Enviamos el pedido a tu API
-            const responsePedido = await fetch('http://localhost:8080/api/pedidos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(pedidoCompleto)
-            });
-
-            if (!responsePedido.ok) throw new Error("Error al crear el pedido");
-
+            // 1. Enviar pedido
+            await crearPedido(pedidoCompleto);
             console.log("✅ Pedido creado correctamente");
 
-            // 2. Creamos la preferencia de Mercado Pago
+            // 2. Crear preferencia de Mercado Pago
             const response: PreferenceMP = await createPreferenceMP({
                 id: 0,
                 titulo: pedidoCompleto.titulo,
@@ -76,17 +67,19 @@ function CheckoutMP({ montoCarrito, itemsCarrito }: CheckoutMPProps) {
 
     //redirectMode es optativo y puede ser self, blank o modal
     return (
-        <div>
-            <button onClick={getPreferenceMP} className='btMercadoPago'>COMPRAR con <br></br> Mercado Pago</button>
+        <div className='containerMercado'>
+            <button onClick={getPreferenceMP} className="btMercadoPago">
+                COMPRAR con <br /> Mercado Pago
+            </button>
             <div className={idPreference ? 'divVisible' : 'divInvisible'}>
                 <Wallet
                     initialization={{ preferenceId: idPreference, redirectMode: "blank" }}
-                    customization={{}} // o directamente podés omitir esta prop si no la usás
+                    customization={{}} // Puedes omitir esto si no lo usás
                 />
-
             </div>
         </div>
     );
+
 
 }
 

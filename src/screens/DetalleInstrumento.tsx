@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { InstrumentoType } from "../models/InstrumentoType";
 import "../styles/InstrumentoDetalle.css";
-import { useCarrito } from '../context/CarritoContext'; 
+import { useCarrito } from '../context/CarritoContext';
+import { obtenerInstrumentoPorId } from "../servicios/FuncionesApi";
 
 const InstrumentoDetalle = () => {
   // Accede a la función para agregar productos al carrito
   const { agregarProducto } = useCarrito();
-  
+
   // Obtiene el id del parámetro de la URL
   const { id } = useParams();
   console.log("Param recibido:", id);
@@ -17,29 +18,23 @@ const InstrumentoDetalle = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!id) return; // Si no hay id, no hacer la solicitud
-    
-    // Hace la solicitud para obtener los detalles del instrumento
-    fetch(`http://localhost:8080/instrumentos/${id}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Error al cargar el instrumento'); // Maneja errores si la respuesta no es exitosa
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setInstrumento(data); // Si la solicitud es exitosa, actualiza el estado con el instrumento
+    if (!id) return;
+
+    obtenerInstrumentoPorId(id)
+      .then(data => {
+        setInstrumento(data);
         console.log("Instrumento cargado:", data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
-        setError("No se pudo cargar el instrumento."); // Maneja errores de la solicitud
+        setError("No se pudo cargar el instrumento.");
       });
-  }, [id]); // Se ejecuta cada vez que el id cambia
+  }, [id]);
+
 
   // Si hay un error, muestra el mensaje de error
   if (error) return <p>{error}</p>;
-  
+
   // Si el instrumento aún no está cargado, muestra un mensaje de carga
   if (!instrumento) return <p>Cargando...</p>;
 

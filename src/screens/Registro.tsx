@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { agregarUsuario } from "../servicios/FuncionesApi";
 
 const Registro = () => {
   const navigate = useNavigate();
@@ -18,11 +19,7 @@ const Registro = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/usuario/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(usuarioDTO),
-      });
+      const response = await agregarUsuario(usuarioDTO);
 
       if (response.ok) {
         setMensaje("Usuario creado ✅ Redirigiendo al login...");
@@ -60,17 +57,17 @@ const Registro = () => {
           />
         </div>
         <div style={{ marginTop: "1rem" }}>
-        <label htmlFor="rol">Rol:</label><br />
-        <select
+          <label htmlFor="rol">Rol:</label><br />
+          <select
             id="rol"
             value={rol}
             onChange={(e) => setRol(e.target.value)}
             required
             style={{ width: "100%", padding: "0.5rem", marginTop: "0.5rem" }}
-        >
+          >
             <option value="VISOR">VISOR</option>
             <option value="ADMIN">ADMIN</option>
-        </select>
+          </select>
         </div>
 
         <button type="submit" style={{ marginTop: "1.5rem" }}>Registrar</button>

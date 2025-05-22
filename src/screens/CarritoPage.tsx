@@ -3,6 +3,7 @@ import { useCarrito } from '../context/CarritoContext';
 import '../styles/Carrito.css';
 import { InstrumentoPedido, PedidoCart, PedidoDetalle } from '../models/PedidoCart';
 import CheckoutMP from '../components/ChekoutMP';
+import { guardarPedido } from '../servicios/FuncionesApi';
 
 const CarritoPage = () => {
   // Accede al carrito y la función para limpiarlo desde el contexto
@@ -13,34 +14,25 @@ const CarritoPage = () => {
   const total = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
 
   // Función para guardar el carrito como un pedido
- const guardarCarrito = async () => {
-  const pedido = new PedidoCart(
-    carrito.map(p => new PedidoDetalle(
-      new InstrumentoPedido(p.id), // solo pasás el ID
-      p.cantidad
-    )),
-    new Date().toISOString() // ⬅️ fecha en formato estándar ISO (ideal para backend)
-  );
+  const guardarCarrito = async () => {
+    const pedido = new PedidoCart(
+      carrito.map(p => new PedidoDetalle(
+        new InstrumentoPedido(p.id), // solo pasás el ID
+        p.cantidad
+      )),
+      new Date().toISOString() // ⬅️ fecha en formato estándar ISO (ideal para backend)
+    );
 
 
     try {
-      const response = await fetch('http://localhost:8080/instrumentos/api/pedidos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pedido)
-      });
-
-      if (!response.ok) throw new Error('Error al guardar el pedido');
-
-      const data = await response.json();
+      const data = await guardarPedido(pedido);
       setMensaje(`El pedido con id ${data.id} se guardó correctamente`);
       limpiarCarrito();
     } catch (error) {
       setMensaje('Hubo un error al guardar el pedido');
       console.error(error);
     }
+
   };
 
   return (

@@ -5,9 +5,10 @@ export interface InstrumentoType {
     modelo: string;
     imagen: string;
     precio: number;
-    costoEnvio: string;
+    costoEnvio: string | number;
     cantidadVendida: number;
     descripcion: string;
-    idCategoria: string;
+    idCategoria: number;
 }
 
+export type InstrumentoCreateType = Omit<InstrumentoType, 'id'>;
