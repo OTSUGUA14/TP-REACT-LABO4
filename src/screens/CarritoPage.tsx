@@ -42,8 +42,8 @@ const CarritoPage = () => {
       {/* Lista los productos del carrito */}
       {carrito.map(producto => (
         <div key={producto.id} className="carrito-item">
-          <span>{producto.nombre}</span>
-          <span>${producto.precio} x {producto.cantidad}</span>
+          <span>{producto.nombre} x {producto.cantidad}</span>
+          <span>${producto.precio} </span>
         </div>
       ))}
 

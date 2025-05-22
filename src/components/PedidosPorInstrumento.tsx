@@ -8,29 +8,31 @@ const PedidosPorInstrumento: React.FC<{ data: any[] }> = ({ data }) => {
 
     return (
         <>
-            <h2>Pedidos por Instrumento</h2>
-            <PieChart width={1500} height={500}>
-                <Pie
-                    data={data}
-                    dataKey="cantidadVendida"
-                    nameKey="nombre"
-                    cx="40%" cy="50%"
-                    outerRadius={150}
-                    fill="#8884d8"
-                    label={({ name }) => name.length > 20 ? name.slice(0, 20) + '...' : name}
-                >
-                    {data.map((_, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-                <Tooltip />
-                <Legend
-                    layout="vertical"
-                    verticalAlign="middle"
-                    align="right"
-                    wrapperStyle={{ fontSize: '12px', maxHeight: 400, overflowY: 'auto' }}
-                />
-            </PieChart>
+            <div className="containerEstadisticasAnio">
+                <h2>Pedidos por Instrumento</h2>
+                <PieChart width={1500} height={500}>
+                    <Pie
+                        data={data}
+                        dataKey="cantidadVendida"
+                        nameKey="nombre"
+                        cx="40%" cy="50%"
+                        outerRadius={150}
+                        fill="#8884d8"
+                        label={({ name }) => name.length > 20 ? name.slice(0, 20) + '...' : name}
+                    >
+                        {data.map((_, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend
+                        layout="vertical"
+                        verticalAlign="middle"
+                        align="right"
+                        wrapperStyle={{ fontSize: '12px', maxHeight: 400, overflowY: 'auto' }}
+                    />
+                </PieChart>
+            </div>
         </>
     );
 };

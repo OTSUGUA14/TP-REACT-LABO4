@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import type { InstrumentoType } from "../models/InstrumentoType";
+import "../styles/Estadisticas.css"
 
 interface Props {
     instrumentos: InstrumentoType[];
@@ -43,29 +44,33 @@ const DetalleInstrumentoPDF: React.FC<Props> = ({ instrumentos, instrumentoSelec
 
     return (
         <>
-            <h2>Detalle Instrumento para PDF</h2>
-            <select onChange={(e) => handleSeleccion(e.target.value)} value={instrumentoSeleccionado?.id ?? ""}>
-                <option value="">-- Seleccione un instrumento --</option>
-                {instrumentos.map(i => (
-                    <option key={i.id} value={i.id}>{i.instrumento}</option>
-                ))}
-            </select>
+            <div className="sectionDetallePDF">
+                <div className="containerDetallePdf">
+                    <h2>Detalle Instrumento para PDF</h2>
+                    <select className="selectInstrumento" onChange={(e) => handleSeleccion(e.target.value)} value={instrumentoSeleccionado?.id ?? ""}>
+                        <option value="">-- Seleccione un instrumento --</option>
+                        {instrumentos.map(i => (
+                            <option key={i.id} value={i.id}>{i.instrumento}</option>
+                        ))}
+                    </select>
+                </div>
 
-            {instrumentoSeleccionado && (
-                <>
-                    <div ref={detalleRef} style={{ border: "1px solid #ccc", marginTop: 20, padding: 20, width: 600 }}>
-                        <h3>{instrumentoSeleccionado.instrumento}</h3>
-                        <img src={`/img/${instrumentoSeleccionado.imagen}`} alt={instrumentoSeleccionado.instrumento} style={{ maxWidth: "100%", height: "auto", marginBottom: 10 }} />
-                        <p><strong>Descripción:</strong> {instrumentoSeleccionado.descripcion}</p>
-                        <p><strong>Precio:</strong> ${instrumentoSeleccionado.precio}</p>
-                        <p><strong>Marca:</strong> {instrumentoSeleccionado.marca}</p>
-                        <p><strong>Modelo:</strong> {instrumentoSeleccionado.modelo}</p>
-                        <p><strong>Cantidad Vendida:</strong> {instrumentoSeleccionado.cantidadVendida}</p>
-                        <p><strong>Costo Envío:</strong> {instrumentoSeleccionado.costoEnvio === "G" ? "Envío Gratis" : `$${instrumentoSeleccionado.costoEnvio}`}</p>
-                    </div>
-                    <button onClick={generarPDF} style={{ marginTop: 10 }}>Descargar PDF del Instrumento</button>
-                </>
-            )}
+                {instrumentoSeleccionado && (
+                    <>
+                        <div ref={detalleRef} style={{ border: "1px solid #ccc", marginTop: 20, padding: 20, width: 600 }}>
+                            <h3>{instrumentoSeleccionado.instrumento}</h3>
+                            <img src={`/img/${instrumentoSeleccionado.imagen}`} alt={instrumentoSeleccionado.instrumento} style={{ maxWidth: "100%", height: "auto", marginBottom: 10 }} />
+                            <p><strong>Descripción:</strong> {instrumentoSeleccionado.descripcion}</p>
+                            <p><strong>Precio:</strong> ${instrumentoSeleccionado.precio}</p>
+                            <p><strong>Marca:</strong> {instrumentoSeleccionado.marca}</p>
+                            <p><strong>Modelo:</strong> {instrumentoSeleccionado.modelo}</p>
+                            <p><strong>Cantidad Vendida:</strong> {instrumentoSeleccionado.cantidadVendida}</p>
+                            <p><strong>Costo Envío:</strong> {instrumentoSeleccionado.costoEnvio === "G" ? "Envío Gratis" : `$${instrumentoSeleccionado.costoEnvio}`}</p>
+                        </div>
+                        <button className="downloadButtonPDF" onClick={generarPDF} style={{ marginTop: 10 }}>Descargar PDF del Instrumento</button>
+                    </>
+                )}
+            </div>
         </>
     );
 };

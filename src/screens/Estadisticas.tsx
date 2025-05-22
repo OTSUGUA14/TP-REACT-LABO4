@@ -62,7 +62,7 @@ const Estadisticas = () => {
 
 
     return (
-        <div style={{ padding: 20 }}>
+        <div  style={{ padding: 20 }}>
             <PedidosPorMes data={pedidosFormateados} />
             <PedidosPorInstrumento data={ventasPorInstrumento} />
             <div className="containerFiltro">

@@ -1,5 +1,98 @@
-.containerFiltro{
+
+.containerEstadisticasMes{
+    margin: auto;
+    width: 70%;
     display: flex;
-    flex-direction: row;
-   
+    flex-direction: column;
+    align-items: center;
+}
+
+.containerEstadisticasMes h2{
+    font-size: 1.8rem;
+    margin: 1rem 0 2rem 0;
+}
+
+.containerEstadisticasAnio{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.containerEstadisticasAnio h2{
+    font-size: 1.8rem;
+    margin: 2rem 0 0 0;
+}
+
+.containerFiltros{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5rem;
+}
+
+.filtrosTitle{
+    margin: 2rem 0;
+    font-size: 1.8rem;
+}
+
+.inputsFiltros{
+    background-color: #fff;
+    width: 100%;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.inputsFiltros label{
+    font-size: 1.5rem;
+    padding-right: 1rem
+}
+
+.inputsFiltros input{
+    width: 10rem;
+    padding: 0.3rem 0;
+}
+
+.inputsFiltros input:nth-of-type(1){
+    margin-right: 3rem;
+}   
+
+.downloadButton{
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.7rem;
+    background-color: #4ea93b;
+    border: 1px solid #333;
+    border-radius:5px;
+}
+
+.sectionDetallePDF{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 10rem;
+}
+
+.containerDetallePdf h2{
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.selectInstrumento{
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+.downloadButtonPDF{
+    font-size: 1.2rem;
+    padding: 0.7rem;
+    background-color: #e53517;
+    border: 1px solid #333;
+    border-radius:5px;
+    color: #fff;
+    font-weight: bold;
 }
