@@ -30,3 +30,23 @@
     color: #00c3ff;
   }
   
+  .logout-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: #222;
+  padding: 8px 12px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  z-index: 100;
+}
+
+.logout-menu button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.logout-menu button:hover {
+  text-decoration: underline;
+}

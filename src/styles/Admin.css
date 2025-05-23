@@ -3,12 +3,12 @@
     margin: auto;
     text-align: center;
   }
-  
+
   .row {
+    border-bottom: 1px solid #333;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #eee;
     padding: 10px 0;
   }
   
@@ -19,32 +19,36 @@
   .col {
     flex: 1;
     padding: 5px;
+    border: 1p solid #333;
   }
   
+
   .new-item {
-    margin-bottom: 20px;
-    background-color: #007bff;
-    padding: 5px;
+    background-color: #007bff77;
+    padding: 7px 20px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
   }
+
   .delete{
     margin-bottom: 20px;
-    background-color: red;
-    padding: 5px;
+    background-color: #ff000077;
+    padding: 7px 10px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
   }
+
   .modify{
     margin-bottom: 20px;
-    background-color: #007bff;
-    padding: 5px;
+    background-color: #007bff77;
+    padding: 7px 10px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
   }
+
   .modal-overlay {
     position: fixed;
     top: 0;
