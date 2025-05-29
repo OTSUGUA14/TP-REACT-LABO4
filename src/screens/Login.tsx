@@ -39,11 +39,16 @@ const Login = () => {
 
   const handleRegister = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
+    var rol;
+    if (nombreUsuario.includes("@admin.com")){
+      rol = "ADMIN"
+    } else {
+      rol = "VISOR"
+    }
     const usuarioDTO = {
       nombreUsuario,
       clave,
-      rol: "VISOR",
+      rol
     };
 
     try {
