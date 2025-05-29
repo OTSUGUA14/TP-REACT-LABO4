@@ -8,7 +8,7 @@ import Admin from "../screens/Admin";
 import CarritoPage from "../screens/CarritoPage";
 import Login from "../screens/Login";
 import Estadisticas from "../screens/Estadisticas";
-
+import PrivateRoute from "../routes/PrivateRoute";
 
 export function AppRouter() {
   return (
@@ -21,7 +21,14 @@ export function AppRouter() {
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/instrumento/:id" element={<InstrumentoDetalle />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
         <Route path="/carrito" element={<CarritoPage />} />
       </Routes>
     </>
